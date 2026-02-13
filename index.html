@@ -3,749 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ebenezer Guest House | Your Home Away From Home</title>
+    <title>Ebenezer Guest House | Lilongwe</title>
     
-    <!-- Font Awesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        /* --- VARIABLES --- */
-        :root {
-            --primary: #E67E22;   /* Warm Orange from logo */
-            --primary-dark: #D35400;
-            --secondary: #27AE60; /* Fresh Green from walls */
-            --dark: #2C3E50;      /* Dark Grey for text */
-            --light: #F9F9F9;     /* Off-white background */
-            --white: #FFFFFF;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Lato', sans-serif;
-        }
-
-        /* --- RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: var(--font-body);
-            color: var(--dark);
-            background-color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        img { width: 100%; display: block; object-fit: cover; }
-        ul { list-style: none; }
-
-        /* --- UTILITIES --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding { padding: 80px 0; }
-        
-        .text-center { text-align: center; }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid var(--primary);
-            cursor: pointer;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .btn:hover {
-            background: transparent;
-            color: var(--primary);
-        }
-
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-            margin: 10px auto 0;
-        }
-
-        /* --- ANIMATIONS --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(90px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- HEADER & NAV --- */
-        header {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
-        .nav-links a:hover { color: var(--primary); }
-
-        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('image-2.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            padding-top: 80px;
-        }
-
-        .hero-content h1 {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* --- ABOUT SECTION --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .about-img {
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-        
-        .about-img img { transition: transform 0.5s; }
-        .about-img:hover img { transform: scale(1.05); }
-
-        /* --- ROOMS SECTION --- */
-        .rooms { background: var(--white); }
-        
-        .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .room-card {
-            background: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-
-        .room-card:hover { transform: translateY(-10px); }
-
-        .room-img-container {
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .room-details { padding: 25px; }
-        .room-details h4 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-dark); }
-        
-        .amenity-tag {
-            display: inline-block;
-            background: #eee;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        /* --- SERVICES & AMENITIES --- */
-        .services { background-color: #f0fdf4; /* Very light green tint */ }
-
-        .services-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .service-box {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .service-list li {
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        .service-list li:last-child { border-bottom: none; }
-
-        /* --- CONTACT --- */
-        .contact {
-            background: var(--dark);
-            color: var(--white);
-            text-align: center;
-        }
-        
-        /* NEW: Contact Form and Info Wrapper for Layout */
-        .contact-content-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 60px;
-            margin-top: 40px;
-            flex-wrap: wrap; 
-        }
-
-        .contact-details {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            text-align: center;
-            padding-top: 30px; 
-        }
-
-        .contact-info { 
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            /* margin-top: 40px; removed to fit inside contact-details */
-        }
-
-        .contact-item i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .contact-item p { font-size: 1.1rem; }
-        
-        .location-highlight {
-            color: var(--secondary);
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-        
-        /* NEW: Contact Form Styles */
-        .contact-form {
-            flex: 1.5;
-            max-width: 500px;
-            text-align: left;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2); /* Stronger shadow for floating effect */
-            color: var(--dark);
-        }
-        
-        .contact-form h3 {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--dark);
-        }
-
-        .form-group { margin-bottom: 20px; }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 5px rgba(230, 126, 34, 0.5);
-        }
-
-        .form-submit-btn {
-            width: 100%;
-            border: none;
-            padding: 15px;
-            font-size: 1.1rem;
-            background: var(--secondary); 
-            color: var(--white);
-            font-weight: 700;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-transform: uppercase;
-        }
-
-        .form-submit-btn:hover { background: var(--primary-dark); }
-        
-        /* Image below the form/details */
-        .location-image {
-            max-width: 600px; 
-            margin: 40px auto 0;
-            border-radius: 10px;
-            border: 2px solid white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        }
-
-
-        /* --- FOOTER --- */
-        footer {
-            background: #1a252f;
-            color: #aaa;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-        }
-
-        /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .contact-content-wrapper {
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
-            }
-            .contact-details, .contact-form {
-                max-width: 100%;
-                min-width: unset;
-                width: 90%;
-            }
-            .contact-info {
-                justify-content: space-around;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .services-wrapper { grid-template-columns: 1fr; }
-            .nav-links { display: none; } 
-            .hamburger { display: block; }
-            
-            /* Mobile Menu (Simple overlay) */
-            .mobile-menu {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                padding: 20px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                display: none;
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            .mobile-menu.active { display: flex; }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">EBENEZER GUEST HOUSE</div>
-                
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#rooms">Rooms</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-
-                <div class="hamburger" id="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>  
-            </nav>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>Ebenezer <span>Guest House</span></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact" class="btn-primary">Book Now</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
-        <!-- Mobile Menu Dropdown -->
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="#home" onclick="closeMenu()">Home</a>
-            <a href="#about" onclick="closeMenu()">About</a>
-            <a href="#rooms" onclick="closeMenu()">Rooms</a>
-            <a href="#services" onclick="closeMenu()">Services</a>
-            <a href="#contact" onclick="closeMenu()">Contact</a>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Your Home Away From Home</h1>
+            <p>Experience comfort and hospitality in Lilongwe Area 38.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn-primary">Contact Us</a>
+                <a href="#services" class="btn-secondary">View Amenities</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-content">
-            <h1 class="reveal">Welcome to Ebenezer</h1>
-            <p class="reveal">Experience comfort, serenity, and hospitality in Lilongwe. Your perfect home away from home.</p>
-            <a href="#contact" class="btn reveal">Book Your Stay</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
     <section id="about" class="section-padding">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img reveal">
-                    <img src="WhatsApp Image 2025-11-27 at 22.45.17_40668ef4.jpg" alt="Ebenezer Exterior">
-                </div>
-                <div class="about-text reveal">
-                    <h3>A Place of Rest</h3>
-                    <p>Located in the quiet and accessible Area 38 of Lilongwe, Ebenezer Guest House offers a peaceful retreat for travelers, business professionals, and families. Just 1KM from Annie's Events Garden, we are perfectly positioned for convenience and privacy.</p>
-                    <p style="margin-top:15px;">Whether you are here for a bridal party, a business trip, or simply to relax, our secure and well-equipped facility ensures you have everything you need.</p>
-                </div>
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2>Welcome to Ebenezer</h2>
+                <p>Ebenezer Guest House offers a serene and secure environment for travelers and locals alike. Whether you are here for business, a bridal party, or a relaxing weekend, we provide top-tier service to make your stay memorable.</p>
+                <ul class="about-list">
+                    <li><i class="fas fa-check-circle"></i> Secure Location</li>
+                    <li><i class="fas fa-check-circle"></i> 24Hrs Electricity & Water Backup</li>
+                    <li><i class="fas fa-check-circle"></i> Affordable Luxury</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <img src="image-18.jpg" alt="Ebenezer Guest House Front View">
             </div>
         </div>
     </section>
 
-    <!-- Rooms / Interiors -->
-    <section id="rooms" class="section-padding rooms">
+    <section id="services" class="services-section section-padding">
         <div class="container">
-            <div class="text-center reveal">
-                <h2 class="section-title">Our Accommodation</h2>
-                <p>Comfortable spaces designed for your relaxation.</p>
+            <div class="section-title">
+                <h2>Our Offerings</h2>
+                <p>We provide a wide range of services and modern amenities to ensure your comfort.</p>
             </div>
-
-            <div class="rooms-grid">
-                <!-- Room 1 -->
-                <div class="room-card reveal">
-                    <div class="room-img-container">
-                        <img src="image-7.jpg" alt="Master Bedroom">
-                    </div>
-                    <div class="room-details">
-                        <h4>Master Suite</h4>
-                        <p>Spacious double bed with premium mosquito netting and elegant furniture.</p>
-                        <div style="margin-top:10px;">
-                            <span class="amenity-tag">King Size Bed</span>
-                            <span class="amenity-tag">En-suite</span>
-                            <span class="amenity-tag">Fan</span>
-                            <span class="amenity-tag">Mosquito Net</span>
-                            <span class="amenity-tag">Work Desk</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Room 2 -->
-                <div class="room-card reveal">
-                    <div class="room-img-container">
-                        <img src="WhatsApp Image 2025-11-27 at 22.45.18_6152a0c1.jpg" alt="Standard Room">
-                    </div>
-                    <div class="room-details">
-                        <h4>Master Suite</h4>
-                        <p>Cozy and bright room featuring tiled floors and large windows for natural light.</p>
-                        <div style="margin-top:10px;">
-                            <span class="amenity-tag">king size Bed</span>
-                            <span class="amenity-tag">Work Desk</span>
-                            <span class="amenity-tag">Mosquito Net</span>
-                            <span class="amenity-tag">Fan</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Living Area -->
-                <div class="room-card reveal">
-                    <div class="room-img-container">
-                        <img src="WhatsApp Image 2025-11-27 at 22.45.18_b4041fcb.jpg" alt="Lounge">
-                    </div>
-                    <div class="room-details">
-                        <h4>Guest Lounge</h4>
-                        <p>Relax in our comfortable lounge area equipped with entertainment systems.</p>
-                        <div style="margin-top:10px;">
-                            <span class="amenity-tag">DSTV</span>
-                            <span class="amenity-tag">Sofas</span>
-                            <span class="amenity-tag">Entertainment</span>
-                        </div>
-                    </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-bed"></i></div>
+                    <h3>Accommodation</h3>
+                    <p>Bed & Breakfast services with comfortable, clean rooms.</p>
                 </div>
                 
-                 <!-- Bathroom -->
-                <div class="room-card reveal">
-                    <div class="room-img-container">
-                        <img src="bathroom.jpg" alt="Bathroom">
-                    </div>
-                    <div class="room-details">
-                        <h4>Modern Bathroom Facilities</h4>
-                        <p>Clean, modern bathrooms with hot water and shower enclosures.</p>
-                        <div style="margin-top:10px;">
-                            <span class="amenity-tag">Hot Shower</span>
-                            <span class="amenity-tag">Modern Fittings</span>
-                            <span class="amenity-tag">Tiled</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Kitchen -->
-                <div class="room-card reveal">
-                    <div class="room-img-container">
-                        <img src="image-4.jpg" alt="Kitchen">
-                    </div>
-                </div>
-                <div class="kitchen-details">
-                    <h4><span style="color: #D35400; font-size: 20px;">Kitchen Facilities</span></h4>
-                    <p>Clean and mordern kitchen set.</p>
-                    <div style="margin-top:10px;">
-                        <span class="amenity-tag">Fryer</span>
-                        <span class="amenity-tag">Rice Cooker</span>
-                        <span class="amenity-tag">Microwave</span>
-                        <span class="amenity-tag">Fridge</span>
-                        <span class="amenity-tag">Cooker</span>
-                        <span class="amenity-tag">Gas stove</span>
-                        
-
-                    </div>
-                </div>
-                <!-- Dining set -->
-                <div class="room-card reveal">
-                    <div class="room-img-container">
-                        <img src="image-3.jpg" alt="Dining Set">
-                    </div>
-                </div>
-                <div class="Dining-details">
-                    <h4><span style="color: #D35400; font-size: 20px;">Dining Set</span></h4>
-                    <p>Clean and mordern Dining set.</p>
-                    <div style="margin-top:10px;">
-                        <span class="amenity-tag">Modern Dining set </span>
-                    </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-utensils"></i></div>
+                    <h3>Dining</h3>
+                    <p>Special meals upon request (at a cost) and self-catering options available.</p>
                 </div>
 
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section (Based on Flyer) -->
-    <section id="services" class="section-padding services">
-        <div class="container">
-            <div class="text-center reveal">
-                <h2 class="section-title">Services & Amenities</h2>
-                <p>We provide everything you need for a comfortable stay.</p>
-            </div>
-
-            <div class="services-wrapper">
-                <!-- Services Column -->
-                <div class="service-box reveal">
-                    <div class="service-icon"><i class="fas fa-concierge-bell"></i></div>
-                    <h3>Our Services</h3>
-                    <ul class="service-list" style="text-align:left; margin-top:20px;">
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> Bed & Breakfast</li>
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> Special Meals Upon Request (At a cost)</li>
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> Bridal Party Hosting</li>
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> Self-Catering Option Available</li>
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> Three Master Bedrooms</li>
-                    </ul>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-glass-cheers"></i></div>
+                    <h3>Events</h3>
+                    <p>Perfect venue for hosting Bridal Parties and intimate gatherings.</p>
                 </div>
 
-                <!-- Amenities Column -->
-                <div class="service-box reveal">
-                    <div class="service-icon"><i class="fas fa-wifi"></i></div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-wifi"></i></div>
                     <h3>Amenities</h3>
-                    <ul class="service-list" style="text-align:left; margin-top:20px;">
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> Free High-Speed Wi-Fi</li>
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> Laundry Services</li>
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> DSTV Entertainment</li>
-                        <li><i class="fas fa-check" style="color:green; margin-right:10px;"></i> 24Hrs Electricity & Water Backup</li>
+                    <ul class="amenities-list">
+                        <li>Free Wi-Fi</li>
+                        <li>Laundry Service</li>
+                        <li>DSTV Entertainment</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section-padding contact">
-        <div class="container reveal">
-            <h2 class="section-title" style="color:var(--white);">Contact Us</h2>
-            <p>Ready to book? Get in touch with us today.</p>
+    <section id="gallery" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gallery</h2>
+            </div>
+            <div class="gallery-grid">
+                <img src="image-3.jpg" alt="Dining Area">
+                <img src="image-6.jpg" alt="Bedroom">
+                <img src="bathroom.jpg" alt="Modern Bathroom">
+                <img src="image-4.jpg" alt="Kitchen">
+                <img src="image-2.jpg" alt="Exterior View">
+                <img src="image-7.jpg" alt="Guest Room">
+            </div>
+        </div>
+    </section>
 
-            <div class="contact-content-wrapper">
-                
-                <div class="contact-details">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <h3>Location</h3>
-                            <p>Lilongwe Area 38</p>
-                            <span class="location-highlight">1KM from Annie's Events Garden</span>
-                        </div>
-
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <h3>Call Us</h3>
-                            <a href="tel:+265995888096">
-                            <p><strong>Phone</strong><br>+265995888096</p>
-                            </a>
-                            <a href="tel:+265882070355">
-                            <p><strong>Phone</strong><br>+265882070355</p>
-                            </a>
-                            <a href="tel:+265999620100">
-                            <p><strong>Phone</strong><br>+265999620100</p>
-                            </a>
-                            <a href="https://www.facebook.com/profile.php?id=61571209174144" target="_blank" id="facebook">
-                                <i class="fa-brands fa-facebook"></i>
-                            </a>
-                            <a href="https://wa.me/+265995888096" target="_blank" id="whatsapp">
-                                <i class="fa-brands fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Contact Form (Right/Bottom Column) -->
-                <div class="contact-form reveal">
-                    <h3>Send us a quick message</h3>
-                    <!-- Note: The action="#" is a placeholder. You would replace this with a backend script (e.g., PHP, Firebase Function) to handle email sending in a real deployment. -->
-                    <form action="https://formspree.io/f/mqavyavo" method="POST"> 
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Hellen Susan Mphande">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="hellensusanmphande.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message / Booking Query</label>
-                            <textarea id="message" name="message" rows="4" required placeholder="I would like to book a room for 3 nights next month..."></textarea>
-                        </div>
-                        <button type="submit" class="form-submit-btn">Send Message</button>
-                    </form>
+    <footer id="contact">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Lilongwe Area 38, 1km from Annie's Events Garden</p>
+                <div class="contact-links">
+                    <a href="tel:+265995888096"><i class="fas fa-phone"></i> +265 995 888 096</a>
+                    <a href="tel:+265882070355"><i class="fas fa-phone"></i> +265 882 070 355</a>
+                    <a href="tel:+265999620100"><i class="fas fa-phone"></i> +265 999 620 100</a>
                 </div>
             </div>
             
-            <div class="text-center">
-                 <img src="WhatsApp Image 2025-11-27 at 22.47.26_ecf6b4a4.jpg" alt="Flyer Details" class="location-image reveal">
+            <div class="footer-col">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="https://wa.me/265995888096" target="_blank" class="social-link whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://web.facebook.com/profile.php?id=61571209174144" class="social-link facebook">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                </div>
             </div>
         </div>
-    </section>
-
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Ebenezer Guest House. All Rights Reserved.</p>
+        <div class="copyright">
+            <p>&copy; 2026 Ebenezer Guest House. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script>
-        // Scroll Reveal Animation
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); // Trigger on load
-
-        // Mobile Menu Toggle
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            
-            // Toggle Icon
-            const icon = hamburger.querySelector('i');
-            if(mobileMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-
-        function closeMenu() {
-            mobileMenu.classList.remove('active');
-            const icon = hamburger.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

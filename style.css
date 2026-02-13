@@ -358,8 +358,8 @@ footer {
 
     }
     .map-container iframe {
-        height: 400px;
-        width: 400px;
+        max-width: 95%;
+        max-height: 95%;
         justify-content: center;
     }
 }

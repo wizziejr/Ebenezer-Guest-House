@@ -357,4 +357,9 @@ footer {
         justify-content: flex-start;
 
     }
+    .map-container iframe {
+        height: 400px;
+        width: 400px;
+        justify-content: center;
+    }
 }

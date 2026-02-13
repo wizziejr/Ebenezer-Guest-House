@@ -348,8 +348,7 @@ footer {
         font-size: 2rem;
     }
     .hero-btns {
-        display: flex;
-        flex-direction: column;
+        display: block;
         gap: 15px;
         text-align: center;
 

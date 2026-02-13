@@ -347,4 +347,10 @@ footer {
     .hero-content h1 {
         font-size: 2rem;
     }
-}
+    .hero-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        
+    }

@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // ── CallMeBot API key for +265995888096 ──────────────────────────
             // IMPORTANT: Replace the value below with the real API key you
             // received from CallMeBot during the one-time WhatsApp setup.
-            const CALLMEBOT_API_KEY = 'AC77BD04EOBE';
+            const CALLMEBOT_API_KEY = 'ygfqaMcdhlvfNP';
             // ─────────────────────────────────────────────────────────────────
 
             const message =

@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `Please confirm availability. Thank you!`;
 
             const whatsappURL = `https://wa.me/265995888096?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
+            window.location.href = whatsappURL;
         });
     }
 });

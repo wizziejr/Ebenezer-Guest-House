@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -16,6 +16,7 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
+
 </head>
 <body>
 
@@ -30,7 +31,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#location">Location</a></li>
-                <li><a href="#contact" class="btn-primary">Book Now</a></li>
+                <li><a href="#booking" class="btn-primary">Book Now</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -45,7 +46,7 @@
             <p>Experience comfort and hospitality in Lilongwe Area 38.</p>
             <div class="hero-btns">
                 <a href="#contact" class="btn-primary">Contact Us</a>
-                <a href="#services" class="btn-secondary">View Amenities</a>
+                <a href="#booking" class="btn-secondary"><strong>Book Now</strong></a>
             </div>
         </div>
     </header>
@@ -151,7 +152,61 @@
         </div>
     </section>
 
-    <section id="location" class="section-padding">
+    <section id="booking" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Book Your Stay</h2>
+                <p>Reserve your room or the entire house for your upcoming visit.</p>
+            </div>
+            
+            <div class="booking-form-container">
+                <form id="bookingForm" action="#" method="POST">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="e.g. Abby Bemeyani" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+265..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkIn">Check-in Date</label>
+                            <input type="date" id="checkIn" name="checkIn" required onchange="calculateTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkOut">Check-out Date (Departure)</label>
+                            <input type="date" id="checkOut" name="checkOut" required onchange="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 100%;">
+                            <label for="accommodation">Accommodation Requirements</label>
+                            <select id="accommodation" name="accommodation" required onchange="calculateTotal()">
+                                <option value="" disabled selected>Select an option...</option>
+                                <option value="55000">1 Room (55,000 MWK / day)</option>
+                                <option value="110000">2 Rooms (110,000 MWK / day)</option>
+                                <option value="165000">Whole House (it has 3 rooms) (165,000 MWK / day)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="price-estimate" id="priceDisplay">
+                        <h4>Estimated Total: <span id="totalCost" style="color: #e67e22;">0</span> MWK</h4>
+                    </div>
+
+                    <button type="submit" class="btn-primary submit-btn">Send Booking Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="section-padding bg-light">
         <div class="container">
             <div class="section-title">
                 <h2>Find Us</h2>
@@ -190,13 +245,14 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2026 Ebenezer Guest House. All Rights Reserved.</p>
+            <p>© 2026 Ebenezer Guest House. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 
-       <script type="application/ld+json">
+
+    <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "guesthouse",

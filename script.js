@@ -115,16 +115,23 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const fullName     = document.getElementById('fullName').value.trim();
-            const phone        = document.getElementById('phone').value.trim();
-            const checkIn      = document.getElementById('checkIn').value;
-            const checkOut     = document.getElementById('checkOut').value;
-            const accommodation = document.getElementById('accommodation');
+            const fullName        = document.getElementById('fullName').value.trim();
+            const phone           = document.getElementById('phone').value.trim();
+            const checkIn         = document.getElementById('checkIn').value;
+            const checkOut        = document.getElementById('checkOut').value;
+            const accommodation   = document.getElementById('accommodation');
             const accommodationText = accommodation.options[accommodation.selectedIndex].text;
-            const totalCost    = document.getElementById('totalCost').innerText;
+            const totalCost       = document.getElementById('totalCost').innerText;
+            const diffDays        = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
 
-            // Calculate nights for the message
-            const diffDays = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
+            const notification = document.getElementById('bookingNotification');
+            const submitBtn    = document.getElementById('submitBtn');
+
+            // ── CallMeBot API key for +265995888096 ──────────────────────────
+            // IMPORTANT: Replace the value below with the real API key you
+            // received from CallMeBot during the one-time WhatsApp setup.
+            const CALLMEBOT_API_KEY = 'AC77BD04EOBE';
+            // ─────────────────────────────────────────────────────────────────
 
             const message =
                 `🏡 *New Booking Request – Ebenezer Guest House*\n\n` +
@@ -137,8 +144,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 `💰 *Estimated Total:* ${totalCost} MWK\n\n` +
                 `Please confirm availability. Thank you!`;
 
-            const whatsappURL = `https://wa.me/265995888096?text=${encodeURIComponent(message)}`;
-            window.location.href = whatsappURL;
+            // Disable button while sending
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+            notification.style.display = 'none';
+            notification.className = 'booking-notification';
+
+            const apiURL =
+                `https://api.callmebot.com/whatsapp.php?phone=265995888096` +
+                `&text=${encodeURIComponent(message)}` +
+                `&apikey=${CALLMEBOT_API_KEY}`;
+
+            fetch(apiURL)
+                .then(res => {
+                    if (res.ok) {
+                        // Success — show confirmation and reset form
+                        notification.className = 'booking-notification success';
+                        notification.innerHTML =
+                            `<strong>✅ Booking request sent!</strong><br>` +
+                            `Thank you, <em>${fullName}</em>. We have received your booking and will get back to you shortly on <strong>${phone}</strong>.`;
+                        notification.style.display = 'block';
+                        bookingForm.reset();
+                        document.getElementById('priceDisplay').style.display = 'none';
+                    } else {
+                        throw new Error('API error');
+                    }
+                })
+                .catch(() => {
+                    notification.className = 'booking-notification error';
+                    notification.innerHTML =
+                        `<strong>❌ Could not send booking.</strong><br>` +
+                        `Please call us directly on <strong>+265 995 888 096</strong> or try again.`;
+                    notification.style.display = 'block';
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Booking Request';
+                    // Scroll notification into view
+                    notification.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
         });
     }
 });
